@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>نمایش شماره‌ها</title>
+</head>
+<body class="bg-sky-300 flex items-center justify-center min-h-screen">
+    <div class="bg-white rounded-lg shadow-lg p-8 w-96">
+        <h2 class="text-2xl font-semibold text-center mb-6">شماره‌ها</h2>
+        <ul class="mb-4">
+            {% if contacts %}
+                {% for contact in contacts %}
+                    <li class="bg-gray-100 rounded-md p-2 mb-2">{{ contact.name }}: {{ contact.phone_number }}</li>
+                {% endfor %}
+            {% else %}
+                <li class="text-center text-gray-500">شماره‌ای موجود نیست.</li>
+            {% endif %}
+        </ul>
+        <a href="{% url 'add_contact' %}" class="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600">افزودن شماره تماس</a>
+    </div>
+</body>
+</html>
