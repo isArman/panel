@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fa">
 <head>
     <meta charset="UTF-8">
@@ -12,6 +13,10 @@
         <div class="flex justify-between mb-4">
             <a href="{% url 'add_contact' %}" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600">اضافه کردن</a>
             <a href="{% url 'view_contacts' %}" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600">نمایش شماره‌ها</a>
+        </div>
+        <div class="flex justify-between mb-4">
+            <!-- دکمه جدید برای ارسال پیامک -->
+            <a href="{% url 'send_sms' %}" class="bg-green-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-green-600">ارسال پیامک</a>
         </div>
         <p class="text-center">برای خروج، لطفاً روی <a href="{% url 'logout' %}" class="text-blue-500">اینجا کلیک کنید</a>.</p>
     </div>

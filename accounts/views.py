@@ -7,6 +7,8 @@ from .models import Contact
 from .forms import ContactForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.contrib import messages
+from .models import SMSMessage
 
 def register(request):
     if request.method == 'POST':
@@ -63,3 +65,31 @@ def view_contacts(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+# def send_sms(request):
+#     if request.method == 'POST':
+#         # منطق ارسال پیامک را اینجا اضافه کن
+#         send_to_all = request.POST.get('send_to_all', False)
+#         if send_to_all:
+#             # ارسال پیامک به همه مشتریان
+#             pass
+#         return render(request, 'accounts/send_sms.html')  # صفحه‌ای که بعد از ارسال نمایش داده می‌شود
+#     return render(request, 'accounts/send_sms.html')
+
+def send_sms(request):
+    if request.method == 'POST':
+        message = request.POST.get('message')
+        all_customers = request.POST.get('all_customers') == 'on'  # چک‌باکس بررسی می‌شود
+        
+        # ذخیره پیامک در دیتابیس
+        sms = SMSMessage.objects.create(
+            user=request.user,
+            message=message,
+            all_customers=all_customers
+        )
+        
+        # نمایش پیام موفقیت‌آمیز
+        messages.success(request, "پیامک با موفقیت ارسال شد!")
+        return redirect('home')
+
+    return render(request, 'accounts/send_sms.html')
